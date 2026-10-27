@@ -78,6 +78,7 @@ class TestGetExtensionFromMimeType:
             ("application/pdf", "pdf"),
             ("image/jpeg", "jpg"),
             ("video/mp4", "mp4"),
+            ("text/csv", "csv"),
             ("application/vnd.ms-excel", "xls"),
         ],
     )

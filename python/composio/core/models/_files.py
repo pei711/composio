@@ -302,29 +302,12 @@ def _is_url(value: str) -> bool:
 
 def _get_extension_from_mimetype(mimetype: str) -> str:
     """Get file extension from mimetype."""
-    mime_to_ext = {
-        "image/jpeg": ".jpg",
-        "image/png": ".png",
-        "image/gif": ".gif",
-        "image/webp": ".webp",
-        "image/svg+xml": ".svg",
-        "image/bmp": ".bmp",
-        "image/tiff": ".tiff",
-        "application/pdf": ".pdf",
-        "application/json": ".json",
-        "application/xml": ".xml",
-        "text/plain": ".txt",
-        "text/html": ".html",
-        "text/css": ".css",
-        "text/javascript": ".js",
-        "application/zip": ".zip",
-        "application/gzip": ".gz",
-        "audio/mpeg": ".mp3",
-        "audio/wav": ".wav",
-        "video/mp4": ".mp4",
-        "video/webm": ".webm",
-    }
-    return mime_to_ext.get(mimetype.lower(), "")
+    clean = mimetype.split(";")[0].strip().lower()
+    if clean in mimetypes._MIME_TO_EXT and clean != "application/octet-stream":
+        return f".{mimetypes._MIME_TO_EXT[clean]}"
+    if clean in mimetypes._REVERSE_TYPES and clean != "application/octet-stream":
+        return mimetypes._REVERSE_TYPES[clean]
+    return ""
 
 
 def _generate_timestamped_filename(extension: str) -> str:

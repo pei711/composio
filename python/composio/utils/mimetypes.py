@@ -517,6 +517,7 @@ _MIME_TO_EXT: t.Dict[str, str] = {
     "text/html": "html",
     "text/css": "css",
     "text/javascript": "js",
+    "text/csv": "csv",
     "application/json": "json",
     "application/xml": "xml",
     "application/pdf": "pdf",
@@ -548,6 +549,10 @@ _MIME_TO_EXT: t.Dict[str, str] = {
     "video/x-msvideo": "avi",
     "video/webm": "webm",
 }
+
+
+# Mapping from lowercase MIME type to file extension with leading dot.
+_REVERSE_TYPES: t.Dict[str, str] = {v.lower(): k for k, v in _types.items()}
 
 
 def get_extension_from_mime_type(mime_type: str) -> str:

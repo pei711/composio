@@ -1780,6 +1780,32 @@ class TestUrlHelperFunctions:
         assert _get_extension_from_mimetype("application/pdf") == ".pdf"
         assert _get_extension_from_mimetype("text/plain") == ".txt"
         assert _get_extension_from_mimetype("application/json") == ".json"
+        # Office, document, and common structured types (issue #5105)
+        assert (
+            _get_extension_from_mimetype(
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
+            == ".xlsx"
+        )
+        assert (
+            _get_extension_from_mimetype(
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            )
+            == ".docx"
+        )
+        assert (
+            _get_extension_from_mimetype(
+                "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+            )
+            == ".pptx"
+        )
+        assert _get_extension_from_mimetype("application/vnd.ms-excel") == ".xls"
+        assert _get_extension_from_mimetype("application/msword") == ".doc"
+        assert _get_extension_from_mimetype("application/vnd.ms-powerpoint") == ".ppt"
+        assert _get_extension_from_mimetype("text/csv") == ".csv"
+        assert _get_extension_from_mimetype("application/x-tar") == ".tar"
+        assert _get_extension_from_mimetype("video/quicktime") == ".mov"
+        assert _get_extension_from_mimetype("audio/ogg") == ".ogg"
 
     def test_get_extension_from_mimetype_unknown_type(self):
         """Test _get_extension_from_mimetype returns empty for unknown types."""
